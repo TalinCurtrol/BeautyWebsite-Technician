@@ -35,6 +35,22 @@ export const getIdOrSubjectFromToken = (): string | null => {
   }
 };
 
+export const getUserNameOrSubjectFromToken = (): string | null => {
+  const token = sessionStorage.getItem(TOKEN_KEY);
+  if (!token) {
+    return null;
+  }
+  try {
+    const decodedToken = jwtDecode(token);
+    console.log(decodedToken.sub);
+
+    return decodedToken.sub;
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    return null;
+  }
+};
+
 //---------------------------------------------------------------------------
 
 export const isValidToken = (accessToken: string): boolean => {

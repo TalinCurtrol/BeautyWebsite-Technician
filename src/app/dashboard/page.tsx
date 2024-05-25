@@ -15,12 +15,15 @@ import Badge from "@mui/material/Badge";
 import { PickersDay, PickersDayProps } from "@mui/x-date-pickers/PickersDay";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
-import { LOGIN_URL, ROOT_URL, endpoints } from "@/urls";
+import { LOGIN_URL, LOGOUT_URL, ROOT_URL, endpoints } from "@/urls";
 import { Transaction } from "@/interfaces";
-import { isSessionTokenValid } from "@/utils/jwtUtils";
+import {
+  TOKEN_KEY,
+  getUserNameOrSubjectFromToken,
+  isSessionTokenValid,
+} from "@/utils/jwtUtils";
 
 export default function Dashboard() {
-  const [userName, setUserName] = useState("sample5@sample.com");
   const [fromDate, setFromDate] = useState(dayjs("1999-01-01"));
   const [toDate, setToDate] = useState(dayjs());
   const [rightList, setRightList] = useState<Transaction[]>([]);
@@ -38,7 +41,11 @@ export default function Dashboard() {
         transaction_id: transactionId,
         time: dayjs().format("YYYY/MM/DD hh:mm"),
       }),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
+      },
     });
     window.location.reload();
   }
@@ -62,9 +69,20 @@ export default function Dashboard() {
   useEffect(() => {
     if (!isSessionTokenValid()) {
       console.error("Login failed");
-      window.location.href = LOGIN_URL;
+      window.location.href = LOGOUT_URL;
     }
-    fetch(ROOT_URL + endpoints.transaction.getTracking + userName)
+
+    fetch(
+      ROOT_URL +
+        endpoints.transaction.getTracking +
+        getUserNameOrSubjectFromToken(),
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data: Transaction[]) => {
         if (data.length !== 0) {
@@ -218,11 +236,13 @@ export default function Dashboard() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+
+        Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
       },
       body: JSON.stringify({
         year: selectedYearandMonth.split("/")[0],
         month: selectedYearandMonth.split("/")[1],
-        userName: userName,
+        userName: getUserNameOrSubjectFromToken(),
       }),
     })
       .then((res) => res.json())
@@ -246,10 +266,11 @@ export default function Dashboard() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
       },
       body: JSON.stringify({
         date: selectedDate,
-        userName: userName,
+        userName: getUserNameOrSubjectFromToken(),
       }),
     })
       .then((res) => res.json())
@@ -264,11 +285,13 @@ export default function Dashboard() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+
+        Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
       },
       body: JSON.stringify({
         dateFrom: dateFrom,
         dateTo: dateTo,
-        userName: userName,
+        userName: getUserNameOrSubjectFromToken(),
       }),
     })
       .then((res) => res.json())

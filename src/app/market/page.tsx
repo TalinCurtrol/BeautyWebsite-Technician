@@ -13,9 +13,13 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
-import { LOGIN_URL, ROOT_URL, endpoints } from "@/urls";
+import { LOGIN_URL, LOGOUT_URL, ROOT_URL, endpoints } from "@/urls";
 import { Job } from "@/interfaces";
-import { isSessionTokenValid } from "@/utils/jwtUtils";
+import {
+  TOKEN_KEY,
+  getUserNameOrSubjectFromToken,
+  isSessionTokenValid,
+} from "@/utils/jwtUtils";
 
 function CustomTitle({ title }: { title: string }) {
   return (
@@ -33,27 +37,53 @@ function CustomTitle({ title }: { title: string }) {
 }
 
 export default function Market() {
-  const [userName, setUserName] = useState("sample5@sample.com");
   const [myjobs, setMyjobs] = useState<Job[]>([]);
   const [less10jobs, setLess10jobs] = useState<Job[]>([]);
   const [more10jobs, setMore10jobs] = useState<Job[]>([]);
   useEffect(() => {
     if (!isSessionTokenValid()) {
       console.error("Login failed");
-      window.location.href = LOGIN_URL;
+      window.location.href = LOGOUT_URL;
     }
-    fetch(ROOT_URL + endpoints.jobs.specify_me + userName)
+
+    fetch(
+      ROOT_URL + endpoints.jobs.specify_me + getUserNameOrSubjectFromToken(),
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data: Job[]) => {
         setMyjobs(data);
       });
-    fetch(ROOT_URL + endpoints.jobs.within_10_miles + userName)
+    fetch(
+      ROOT_URL +
+        endpoints.jobs.within_10_miles +
+        getUserNameOrSubjectFromToken(),
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data: Job[]) => {
         console.log(data);
         setLess10jobs(data);
       });
-    fetch(ROOT_URL + endpoints.jobs.more_10_miles + userName)
+    fetch(
+      ROOT_URL + endpoints.jobs.more_10_miles + getUserNameOrSubjectFromToken(),
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data: Job[]) => {
         setMore10jobs(data);
@@ -111,10 +141,12 @@ export default function Market() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
         },
         body: JSON.stringify({
           order_id: item.id,
-          technician_userName: userName,
+          technician_userName: getUserNameOrSubjectFromToken(),
         }),
       }).then((res) => {
         if (res.status === 200) {

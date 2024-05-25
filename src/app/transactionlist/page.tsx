@@ -16,8 +16,12 @@ import { useRouter } from "next/navigation";
 import { navigate } from "../actions";
 import { useEffect, useState } from "react";
 import { Transaction } from "@/interfaces";
-import { LOGIN_URL, ROOT_URL, endpoints } from "@/urls";
-import { isSessionTokenValid } from "@/utils/jwtUtils";
+import { LOGIN_URL, LOGOUT_URL, ROOT_URL, endpoints } from "@/urls";
+import {
+  TOKEN_KEY,
+  getUserNameOrSubjectFromToken,
+  isSessionTokenValid,
+} from "@/utils/jwtUtils";
 
 const SERVICE_STATE_ACCEPTED = "Accepted";
 const SERVICE_STATE_ON_THE_WAY = "On the way";
@@ -25,14 +29,24 @@ const SERVICE_STATE_IN_PROGRESS = "In Progress";
 const SERVICE_STATE_DONE = "Done";
 
 export default function TransactionList() {
-  const [userName, setUserName] = useState("sample5@sample.com");
   const [data, setData] = useState<Transaction[]>([]);
   useEffect(() => {
     if (!isSessionTokenValid()) {
       console.error("Login failed");
-      window.location.href = LOGIN_URL;
+      window.location.href = LOGOUT_URL;
     }
-    fetch(ROOT_URL + endpoints.transaction.getAllTransactions + userName)
+
+    fetch(
+      ROOT_URL +
+        endpoints.transaction.getAllTransactions +
+        getUserNameOrSubjectFromToken(),
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data: Transaction[]) => {
         console.log(data);
@@ -55,6 +69,7 @@ export default function TransactionList() {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
+                  Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
                 },
                 body: JSON.stringify({
                   time: format(currentDate, "yyyy/MM/dd hh:mm"),
@@ -95,6 +110,7 @@ export default function TransactionList() {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
+                  Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
                 },
                 body: JSON.stringify({
                   time: format(currentDate, "yyyy/MM/dd hh:mm"),
@@ -133,6 +149,7 @@ export default function TransactionList() {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
+                  Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
                 },
                 body: JSON.stringify({
                   time: format(currentDate, "yyyy/MM/dd hh:mm"),

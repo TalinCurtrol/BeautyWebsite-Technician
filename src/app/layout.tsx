@@ -16,7 +16,7 @@ import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Select } from "@mui/material";
 import { TOKEN_KEY } from "@/utils/jwtUtils";
-import { LOGIN_URL } from "@/urls";
+import { LOGIN_URL, LOGOUT_URL } from "@/urls";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -192,7 +192,7 @@ export function CustomHeader({ items }: { items: NavItem[] }) {
               }}
               onClick={() => {
                 sessionStorage.removeItem(TOKEN_KEY);
-                window.location.href = LOGIN_URL;
+                window.location.href = LOGOUT_URL;
               }}
             >
               LOG OUT

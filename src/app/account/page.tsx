@@ -8,7 +8,7 @@ import theme from "../../theme";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import Divider from "@mui/material/Divider";
-import { LOGIN_URL, ROOT_URL, endpoints } from "@/urls";
+import { LOGIN_URL, LOGOUT_URL, ROOT_URL, endpoints } from "@/urls";
 import {
   TechnicianAccount,
   TECHNICIAN_STATUS_CHECK_PASS,
@@ -17,10 +17,14 @@ import {
   TECHNICIAN_STATUS_CHECK_WAITING,
 } from "@/interfaces";
 import { red } from "@mui/material/colors";
-import { TOKEN_KEY, isSessionTokenValid } from "@/utils/jwtUtils";
+import {
+  TOKEN_KEY,
+  getIdOrSubjectFromToken,
+  getUserNameOrSubjectFromToken,
+  isSessionTokenValid,
+} from "@/utils/jwtUtils";
 
 export default function Account() {
-  const [userName, setUserName] = useState("sample5@sample.com");
   const [data, setData] = useState<TechnicianAccount>({
     id: 0,
     firstName: "",
@@ -42,10 +46,22 @@ export default function Account() {
   useEffect(() => {
     if (!isSessionTokenValid()) {
       console.error("Login failed");
-      window.location.href = LOGIN_URL;
+      window.location.href = LOGOUT_URL;
     }
 
-    fetch(ROOT_URL + endpoints.technician.accountByuserName + userName)
+    console.log("token里的name=" + getUserNameOrSubjectFromToken());
+
+    fetch(
+      ROOT_URL +
+        endpoints.technician.accountByuserName +
+        getUserNameOrSubjectFromToken(),
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data: TechnicianAccount) => {
         setData(data);
@@ -166,6 +182,8 @@ export default function Account() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
         },
         body: JSON.stringify(data),
       }).then((response) => {
@@ -221,6 +239,8 @@ export default function Account() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
         },
         body: JSON.stringify(data),
       })

@@ -10,8 +10,12 @@ import DangerousIcon from "@mui/icons-material/Dangerous";
 import Divider from "@mui/material/Divider";
 import ImageUpload from "./ImageUpload";
 import { TechnicianProfile } from "@/interfaces";
-import { LOGIN_URL, ROOT_URL, endpoints } from "@/urls";
-import { isSessionTokenValid } from "@/utils/jwtUtils";
+import { LOGIN_URL, LOGOUT_URL, ROOT_URL, endpoints } from "@/urls";
+import {
+  TOKEN_KEY,
+  getUserNameOrSubjectFromToken,
+  isSessionTokenValid,
+} from "@/utils/jwtUtils";
 
 const TECHNICIAN_STATUS_CHECK_PASS = "pass";
 const TECHNICIAN_STATUS_CHECK_FAILED = "failed";
@@ -19,7 +23,6 @@ const TECHNICIAN_STATUS_CHECK_ONGOING = "ongoing";
 const TECHNICIAN_STATUS_CHECK_WAITING = "waiting for upload";
 
 export default function Profile() {
-  const [userName, setUserName] = useState("sample5@sample.com");
   const [data, setData] = useState<TechnicianProfile>({
     id: 0,
     description: "",
@@ -39,9 +42,20 @@ export default function Profile() {
   useEffect(() => {
     if (!isSessionTokenValid()) {
       console.error("Login failed");
-      window.location.href = LOGIN_URL;
+      window.location.href = LOGOUT_URL;
     }
-    fetch(ROOT_URL + endpoints.technician.accountByuserName + userName)
+
+    fetch(
+      ROOT_URL +
+        endpoints.technician.accountByuserName +
+        getUserNameOrSubjectFromToken(),
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data: TechnicianProfile) => {
         console.log(data);
@@ -89,6 +103,7 @@ export default function Profile() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
         },
         body: JSON.stringify(data),
       })
@@ -151,6 +166,7 @@ export default function Profile() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
         },
         body: JSON.stringify(data),
       }).then((response) => {
