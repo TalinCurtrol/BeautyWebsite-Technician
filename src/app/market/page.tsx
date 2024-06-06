@@ -164,14 +164,25 @@ export default function Market() {
     };
     return (
       <ListItemButton key={item.id}>
-        <ListItemText primary={item.service_name} sx={{ fontweight: "bold" }} />
-        <ListItemText primary="Service Date: " secondary={item.service_date} />
-        <ListItemText primary="Commissions:" secondary={item.commissions} />
+        <ListItemText
+          primary={item.service_name}
+          sx={{ fontweight: "bold", maxWidth: "250px", minWidth: "250px" }}
+        />
+        <ListItemText primary="Service Time: " secondary={item.service_date} />
+        <ListItemText
+          primary="Commissions:"
+          secondary={"$" + item.commissions}
+        />
         <ListItemText
           primary="Target Address:"
           secondary={item.customer_address}
+          sx={{ maxWidth: "250px", minWidth: "250px" }}
         />
-        <ListItemText primary="Client Name:" secondary={item.customer_name} />
+        <ListItemText
+          primary="Client Name:"
+          secondary={item.customer_name}
+          sx={{ maxWidth: "250px", minWidth: "250px" }}
+        />
         <>
           <Button onClick={handleClickOpen}>Take it</Button>
           <Dialog
@@ -180,7 +191,7 @@ export default function Market() {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">
+            <DialogTitle id="alert-dialog-title" sx={{ fontFamily: "bold" }}>
               {"Do you want to take this order?"}
             </DialogTitle>
             <DialogContent>

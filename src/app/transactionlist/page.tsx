@@ -1,5 +1,16 @@
 "use client";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import { format } from "date-fns";
 import {
@@ -30,6 +41,8 @@ const SERVICE_STATE_DONE = "Done";
 
 export default function TransactionList() {
   const [data, setData] = useState<Transaction[]>([]);
+  const [giveupId, setGiveupId] = useState("0");
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     if (!isSessionTokenValid()) {
       console.error("Login failed");
@@ -215,6 +228,7 @@ export default function TransactionList() {
       );
     }
   };
+
   const columu_title: GridColDef[] = [
     { field: "id", headerName: "ID" },
     { field: "service_name", headerName: "Service Name" },
@@ -293,6 +307,61 @@ export default function TransactionList() {
         }}
         pageSizeOptions={[5, 10, 25]}
       />
+
+      <Container
+        sx={{ border: "1px solid grey", borderRadius: 2, marginTop: "20px" }}
+      >
+        <TextField
+          label="  I want to give up a transaction:"
+          variant="outlined"
+          name="  I want to give up a transaction:"
+          value={giveupId}
+          onChange={(e) => {
+            setGiveupId(e.target.value);
+          }}
+          fullWidth
+          margin="normal"
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          Give Up
+        </Button>
+        <>
+          <Dialog
+            open={open}
+            onClose={() => {
+              setOpen(false);
+            }}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Do you want to give up this order?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Please be careful, you maybe face with penalty!
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                }}
+                autoFocus
+              >
+                Cancel
+              </Button>
+              <Button onClick={() => {}}>Give up</Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      </Container>
     </Container>
   );
 }

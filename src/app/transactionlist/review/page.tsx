@@ -1,6 +1,7 @@
 "use client";
 import { Transaction_review } from "@/interfaces";
 import { ROOT_URL, endpoints } from "@/urls";
+import { TOKEN_KEY } from "@/utils/jwtUtils";
 import {
   Box,
   Button,
@@ -35,7 +36,15 @@ export default function Review() {
   useEffect(() => {
     if (searchParams.get("reviewed") === "1") {
       fetch(
-        ROOT_URL + endpoints.transaction.getReview + `${searchParams.get("id")}`
+        ROOT_URL +
+          endpoints.transaction.getReview +
+          `${searchParams.get("id")}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
+          },
+        }
       )
         .then((res) => res.json())
         .then((data) => {
@@ -49,6 +58,7 @@ export default function Review() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${sessionStorage.getItem(TOKEN_KEY)}`,
       },
       body: JSON.stringify({
         order_id: searchParams.get("id"),

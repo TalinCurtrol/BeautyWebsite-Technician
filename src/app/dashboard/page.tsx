@@ -67,10 +67,10 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    if (!isSessionTokenValid()) {
-      console.error("Login failed");
-      window.location.href = LOGOUT_URL;
-    }
+    // if (!isSessionTokenValid()) {
+    //   console.error("Login failed");
+    //   window.location.href = LOGOUT_URL;
+    // }
 
     fetch(
       ROOT_URL +

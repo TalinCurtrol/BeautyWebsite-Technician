@@ -277,13 +277,20 @@ export default function Account() {
     const image_string = "data:image/jpeg;base64," + data[bindwith];
     return (
       <>
-        <Grid container xs={12} sm={16} md={16} lg={16} marginTop={5}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "left",
+            gap: 2,
+          }}
+        >
           <Typography variant="h5" marginRight={5}>
             {title}:
           </Typography>
           <img src={image_string} style={{ width: "200px", height: "150px" }} />
           <ImageUploader bindwith={bindwith} />
-        </Grid>
+        </Box>
         <Grid container xs={12} sm={16} md={16} lg={16} marginBottom={5}>
           <Typography variant="h6" marginRight={5} marginLeft={5}>
             check status:
@@ -367,7 +374,7 @@ export default function Account() {
         }}
       >
         <Typography variant="h2" sx={{ marginBottom: 6 }}>
-          Account details
+          Account #{getIdOrSubjectFromToken()} details
         </Typography>
         <Grid container spacing={2} mb={2}>
           <Grid item xs={12} sm={6} md={6} lg={6}>

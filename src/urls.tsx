@@ -1,6 +1,6 @@
 export const ROOT_URL = `http://127.0.0.1:5000`;
-export const LOGIN_URL = "http://127.0.0.1:3001/TechnicianEntry";
-export const LOGOUT_URL = "http://127.0.0.1:3001/Logout";
+export const LOGIN_URL = "http://127.0.0.1:10004/react/";
+export const LOGOUT_URL = "http://127.0.0.1:10004/react/";
 
 export const endpoints = {
   technician: {
