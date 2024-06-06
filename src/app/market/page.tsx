@@ -90,47 +90,6 @@ export default function Market() {
       });
   }, []);
 
-  // const res1 = await fetch(
-  //   ROOT_URL + endpoints.technician.accountByuserName + `${Technician_id}`
-  // );
-  // const technician_account = await res1.json();
-  // var current_address = technician_account.address;
-
-  // const res2 = await fetch(`http://localhost:9000/jobs`, {
-  //   cache: "no-store",
-  // });
-  // const jobs = await res2.json();
-
-  // const res3 = await fetch(`http://localhost:9000/getgooglemapkey`, {
-  //   cache: "no-store",
-  // });
-  // const data3 = await res3.json();
-  // var googlemapkey = data3.key;
-  // var less10jobs: Job[] = [];
-  // var more10jobs: Job[] = [];
-
-  // for (const j of jobs) {
-  //   var url = encodeURI(
-  //     "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=" +
-  //       j.customer_address +
-  //       "&origins=" +
-  //       current_address +
-  //       "&units=imperial&key=" +
-  //       googlemapkey
-  //   );
-  //   console.log(url);
-  //   const res4 = await fetch(url);
-  //   const data4 = await res4.json();
-  //   var distance = Number(
-  //     data4.rows[0].elements[0].distance.text.split(" ")[0]
-  //   );
-  //   if (distance <= 10) {
-  //     less10jobs.push(j);
-  //   } else {
-  //     more10jobs.push(j);
-  //   }
-  // }
-
   function CustomListItemButton({ item }: { item: Job }) {
     const [open, setOpen] = useState(false);
     function handleClose() {
@@ -164,6 +123,11 @@ export default function Market() {
     };
     return (
       <ListItemButton key={item.id}>
+        <ListItemText
+          primary="Job ID"
+          secondary={item.id}
+          sx={{ fontweight: "bold", maxWidth: "100px", minWidth: "100px" }}
+        />
         <ListItemText
           primary={item.service_name}
           sx={{ fontweight: "bold", maxWidth: "250px", minWidth: "250px" }}
