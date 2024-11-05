@@ -1,0 +1,6 @@
+id,firstName,lastName,email,phone,address,postCode
+1,Samantha,Evergreen,johndoe123@example.com,6112345678,"123 Elm Street, Springfield",12345
+2,Xavier,Blackwood,emilysmith789@gmail.com,6112345679,"456 Maple Avenue, Lakeside",12346
+3,Sterling,Penelope,alexanderbrown456@hotmail.com,6112345680,"789 Oak Lane, Willow Creek",12347
+4,Donovan,Frost,sophiewilson321@yahoo.com,6112345681,"321 Pine Road, Mountain View",12348
+5,Jasmine,Meadows,maxwelljones987@outlook.com,6112345682,"987 Birch Court, Riverside",12349

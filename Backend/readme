@@ -1,0 +1,6 @@
+Run the initializeDatabase.py  in the mongodb initializeDatabase
+to initalize the mongodb database
+Run the pip command
+pip install -r requirements.txt
+Then run the code
+python main.py

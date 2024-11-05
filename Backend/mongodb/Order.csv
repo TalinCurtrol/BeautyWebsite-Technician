@@ -1,0 +1,6 @@
+id,userId,technicianId,status,serviceId,addonId,location,createdAt,date&time,customerRating,customerFeedback,technicianRating,technicianFeedback,commissions,surcharge,currentState,acceptedTime,onTheWayTime,inProgressTime,doneTime,reviewed,price
+1,2,5,Completed,[2],"[3,6]","456 Maple Avenue, Lakeside",2024/4/29 12:00,2024/4/29 12:00,4,Excellent Service,,,40,5,Done,2024/4/29 12:00,2024/4/29 12:00,2024/4/29 12:00,2024/4/29 12:00,0 ,50
+2,3,1,Pending,[1],"[1,6]","789 Oak Lane, Willow Creek",2024/4/29 12:30,2024/4/29 12:30,,,,,40,5,Accept,2024/4/29 12:00,,,,0 ,50
+3,4,5,Refunded,"[1,2]",[],"321 Pine Road, Mountain View",2024/4/29 13:00,2024/4/29 13:00,,,,,40,5,on the Way,2024/4/29 12:00,2024/4/29 12:00,,,0 ,50
+4,4,2,Completed,[3],[],"321 Pine Road, Mountain View",2024/4/29 13:30,2024/4/29 13:30,3,Good,,,40,5,In progress,2024/4/29 12:00,2024/4/29 12:00,2024/4/29 12:00,,0 ,50
+5,2,3,Pending,[5],[2],"456 Maple Avenue, Lakeside",2024/4/29 14:00,2024/4/29 14:00,,,,,40,5,Done,2024/4/29 12:00,2024/4/29 12:00,2024/4/29 12:00,2024/4/29 12:00,0 ,50

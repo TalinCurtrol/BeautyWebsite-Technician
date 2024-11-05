@@ -1,0 +1,15 @@
+id,name,description,checked,category,price
+1,Exfoliation, $5.00 ,FALSE,Skin & Body Care,5
+2,Mask, $5.00 ,FALSE,Skin & Body Care,5
+3,Paraffin, $8.00 ,FALSE,Skin & Body Care,8
+4,Massage, $10.00 ,FALSE,Skin & Body Care,10
+5,Polish (hands), $12.00 ,FALSE,Polish Change,12
+6,Polish (feet), $14.00 ,FALSE,Polish Change,14
+7,French (hands), $14.00 ,FALSE,Polish Change,14
+8,French (feet), $17.00 ,FALSE,Polish Change,17
+9,Gel Color, $25.00 ,FALSE,Polish Change,25
+10,Nail Repair, $5.00 ,FALSE,Nail Care & Design,5
+11,French, $5.00 ,FALSE,Nail Care & Design,5
+12,Buff shine, $5.00 ,FALSE,Nail Care & Design,5
+13,Acrylic Removal Full Set, $5.00 ,FALSE,Acrylic Removal,5
+14,Acrylic Removal Mani, $7.00 ,FALSE,Acrylic Removal,7

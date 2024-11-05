@@ -1,0 +1,5 @@
+Flask
+pymongo
+stripe
+PyJWT
+requests

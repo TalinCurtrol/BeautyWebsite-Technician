@@ -1,0 +1,19 @@
+id,images,name,description,price,priceSale,onSale,available,durations,tags,totalviews,ratingNumber,addon,category
+1,,Simpli Manicure,"Quick and simple refresh including a nail and cuticle trim, hand massage, and nail polish of your choice.",18,18,FALSE,TRUE,30,popular,165,5,"[1,2,3,4]",Manicures
+2,,TLC Manicure,"Soothe those overworked hands, treating them to a nail and cuticle trim, collagen scrub exfoliation, deep moisturization, warm lotion massage, and nail polish of your choice.",25,25,FALSE,TRUE,60,,56,4,"[1,2,3,4]",Manicures
+3,,Ultimate Manicure,"Our most luxurious manicure with a nail and cuticle trim, collagen scrub exfoliation, deep moisturization, and paraffin wax treatment, followed by a warm lotion massage and nail polish of your choice.",30,30,FALSE,TRUE,60,,48,4.5,"[1,2,3,4]",Manicures
+4,,Gel Manicure,Enjoy our Simpli Manicure finished with long-lasting gel polish.,35,35,FALSE,TRUE,60,new,12,5,"[1,2,3,4]",Manicures
+5,,Acrylic with Regular Polish,,44,44,FALSE,TRUE,90,popular,122,5,"[5,6,7,8,9,10,11,12,13,14]",Acrylics & Gel
+6,,Pink & White Powder,Includes gel top coat,55,55,FALSE,TRUE,90,popular,144,5,"[5,6,7,8,9,10,11,12,13,14]",Acrylics & Gel
+7,,Powder Color,Includes gel top coat,50,50,FALSE,TRUE,90,popular,156,5,"[5,6,7,8,9,10,11,12,13,14]",Acrylics & Gel
+8,,IBD / Lume Gel,Does not include color gel polish,48,48,FALSE,TRUE,90,,48,5,"[5,6,7,8,9,10,11,12,13,14]",Acrylics & Gel
+9,,Kid's Manicure,,10,10,FALSE,TRUE,20,,16,4,"[1,2,3,4]",Lil' Ones
+10,,Kid's Spa Pedicure,,18,18,FALSE,TRUE,20,,16,4,"[1,2,3,4]",Lil' Ones
+11,,Refresher Facial,"Enjoy a quick, refreshing facial treatment including a relaxing face massage.",42,42,FALSE,TRUE,40,popular,108,4.8,"[1,2,3,4]",Skin Care
+12,,TLC Facial,"Look and feel flawless as we use the purest botanical extracts to cleanse, exfoliate, mask moisturize, and massage away any skin imperfections.",62,62,FALSE,TRUE,60,,46,5,"[1,2,3,4]",Skin Care
+13,,Ultimate Facial,"Feel like royalty with our most luxurious facial, complete with multiple masks, wrinkle treatment, and a massage of your face, neck, shoulders, and arms.",75,75,FALSE,TRUE,60,,49,4,"[1,2,3,4]",Skin Care
+14,,Acne Facial,"Tackle problem skin with a special acne treatment and pimple extraction, complete with our Mini Facial",80,80,FALSE,TRUE,75,,32,4.7,"[1,2,3,4]",Skin Care
+15,,Face,Full,45,45,FALSE,TRUE,45,popular,108,5,"[1,2,3,4]",Waxing
+16,,Bikini,,30,30,FALSE,TRUE,30,,49,4.8,"[1,2,3,4]",Waxing
+17,,Arms,Full,40,40,FALSE,TRUE,30,,32,5,"[1,2,3,4]",Waxing
+18,,Legs,,68,68,FALSE,TRUE,60,popular,108,4,"[1,2,3,4]",Waxing
